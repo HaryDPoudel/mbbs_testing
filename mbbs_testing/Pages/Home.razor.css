@@ -1,0 +1,114 @@
+﻿/* --- Default (Mobile-First) Styles --- */
+
+.homepage-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px; /* Less padding on small screens */
+    background-color: #F8F8F8;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.content-block {
+    width: 100%; /* Take full width on mobile */
+    max-width: 650px;
+    text-align: center;
+    padding: 25px; /* Reduced padding for mobile density */
+    background-color: #FFFFFF;
+    border-radius: 8px; /* Slightly smaller border radius for mobile */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Typography adjustments for mobile readability */
+.main-title {
+    font-size: 2rem; /* Smaller H1 */
+    font-weight: 800;
+    color: #1A1A1A;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 1rem; /* Standard mobile text size */
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Statistic size adjusted for mobile */
+.statistic {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #28a745;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* MOBILE-FIRST BUTTON: FULL WIDTH */
+.cta-button {
+    width: 100%; /* Key change: Button is now full-width */
+    background-color: #007BFF;
+    color: orangered;
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding: 16px 20px; /* Generous vertical padding for easy tapping */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 25px;
+    
+    color: white !important;
+    display: inline-block;
+}
+
+    .cta-button span {
+        color: white !important;
+        margin-right: 8px;
+
+    }
+
+    .cta-button:hover {
+        background-color: #0056b3;
+        text-decoration:none;
+    }
+
+    .cta-button:active {
+        transform: scale(0.98); /* Use a scale effect for confirmation tap on mobile */
+        background-color: #004085;
+    }
+
+/* --- Desktop/Tablet Overrides (Min-width: 600px) --- */
+
+@media (min-width: 600px) {
+    .content-block {
+        padding: 40px; /* Restore desktop padding */
+        border-radius: 12px;
+    }
+
+    .main-title {
+        font-size: 2.5rem; /* Larger H1 for desktop */
+        margin-bottom: 20px;
+    }
+
+    .description {
+        font-size: 1.15rem; /* Larger body text for desktop */
+    }
+
+    .statistic {
+        font-size: 4rem; /* Restore large stat size */
+    }
+
+    .cta-button {
+        width: auto; /* Button reverts to auto-width (centered due to parent) */
+        padding: 18px 40px;
+        font-size: 1.3rem;
+    }
+}

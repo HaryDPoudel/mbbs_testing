@@ -1,0 +1,44 @@
+﻿
+
+@page "/"
+@* @inject NavigationManager NavManager *@
+
+<div class="homepage-container">
+
+    <div class="content-block">
+
+        <h2 class="main-title">
+            Ace Your MBBS Entrance.<br>
+            Anytime, Anywhere.
+        </h2>
+        <p class="description">
+            Practice in quick, focused **20-question sessions**.
+            Learn every extra minute and get ready for the entrance exam.
+        </p>
+       
+            <NavLink class="cta-button" href="quiz">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Start 20-Question Quiz
+            </NavLink>
+       
+
+        <div class="stat-container">
+            <span class="statistic">5000+</span>
+            <span class="stat-label">AIIMS PG Exam Questions</span>
+        </div>
+       
+
+        <p class="coming-soon">
+            *More services and features coming soon.*
+        </p>
+
+    </div>
+
+</div>
+
+@* @code {
+    private void StartQuiz()
+    {
+        // Navigates the user to the route defined for the next screen (the quiz)
+        NavManager.NavigateTo("/quiz");
+    }
+} *@

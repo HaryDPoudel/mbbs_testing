@@ -1,0 +1,47 @@
+﻿@using mbbs_testing.Pages
+
+<div class="summary-card">
+
+    <h2>🎉 Quiz Completed!</h2>
+
+    <p class="score-text">
+        You scored <strong>@Score</strong> out of <strong>@TotalQuestions</strong>
+    </p>
+
+    <p class="feedback-text">
+        @GetFeedbackMessage()
+    </p>
+
+    <button class="restart-btn" @onclick="HandleRestartQuiz">
+        Restart Quiz
+    </button>
+
+</div>
+
+@code {
+    [Parameter] public int Score { get; set; }
+    [Parameter] public int TotalQuestions { get; set; }
+    [Parameter] public EventCallback OnRestartQuiz { get; set; }
+
+    private async Task HandleRestartQuiz()
+    {
+        await OnRestartQuiz.InvokeAsync();
+    }
+
+    private string GetFeedbackMessage()
+    {
+        double percent = ((double)Score / TotalQuestions) * 100;
+
+        if (percent == 100)
+            return "Perfect score! Outstanding work—you're mastering this material!";
+
+        if (percent >= 75)
+            return "Great job! You're doing really well. Keep practicing to reach perfection!";
+
+        if (percent >= 50)
+            return "Good effort! Review some topics and try again—you’ll improve quickly.";
+
+        return "Don’t worry—every expert starts as a beginner. Keep practicing, and you’ll get there!";
+    }
+}
+

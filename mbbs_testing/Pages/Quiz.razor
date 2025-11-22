@@ -1,0 +1,104 @@
+﻿@page "/quiz"
+@using mbbs_testing.Components
+@using mbbs_testing.Models
+@inject HttpClient Http
+
+<h3>Quiz Page (Loading Test)</h3>
+
+@if (quizQuestions == null || !quizQuestions.Any())
+{
+    <p>Loading quiz...</p>
+}
+else if (isFinished)
+{
+    <QuizSummary Score="score" TotalQuestions="quizQuestions.Count" OnRestartQuiz="RestartQuiz" />
+}
+else
+{
+    <QuestionCard Question="CurrentQuestion"
+                  QuestionIndex="currentIndex + 1"
+                  TotalQuestions="quizQuestions.Count"
+                  ShowFeedback="showFeedback"
+                  FeedbackMessage="@feedbackMessage"
+                  OnSelectAnswer="SelectAnswer"
+                  OnNextQuestion="NextQuestion" />
+   
+
+}
+
+
+@code {
+    List<QuestionItem>? allQuestions = new();
+    List<QuestionItem>? quizQuestions = new(); // the picked 20 questions
+    int currentIndex = 0;
+    int score = 0;
+    bool showFeedback = false;
+    string feedbackMessage = "";
+    bool isFinished = false;
+
+
+    List<string> Options => new List<string> { CurrentQuestion.opa, CurrentQuestion.opb, CurrentQuestion.opc, CurrentQuestion.opd };
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        allQuestions = await Http.GetFromJsonAsync<List<QuestionItem>>("sample-data/readable_qb_data");
+        StartQuiz();
+
+    }
+
+    QuestionItem CurrentQuestion => quizQuestions[currentIndex];
+
+
+
+    void StartQuiz()
+    {
+        // pick 20 random questions
+        var rng = new Random();
+        quizQuestions = allQuestions.OrderBy(q => rng.Next()).Take(20).ToList();
+        currentIndex = 0;
+        score = 0;
+        isFinished = false;
+        showFeedback = false;
+        feedbackMessage = "";
+    }
+
+
+    void SelectAnswer(string option)
+    {
+        showFeedback = true;
+
+        string? correct = CurrentQuestion.opc;
+        if (option == correct)
+        {
+            feedbackMessage = "✅ Correct!";
+            score++;
+        }
+        else
+        {
+            feedbackMessage = "❌ Wrong!";
+        }
+
+    
+    }
+
+    void NextQuestion()
+    {
+        showFeedback = false;
+        feedbackMessage = "";
+        currentIndex++;
+        if (currentIndex >= quizQuestions.Count) isFinished = true;
+    }
+
+    void RestartQuiz() => StartQuiz();
+
+    
+
+
+   
+}
+
+
+
+    
+

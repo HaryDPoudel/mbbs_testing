@@ -1,0 +1,121 @@
+﻿/************************************
+    Quiz Component Styling
+*************************************/
+
+.quiz-card {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.quiz-header h3 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.quiz-question p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/************************************
+    Options Grid
+*************************************/
+.quiz-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.quiz-option {
+    padding: 14px 18px;
+    background: #f5f7fa;
+    border: 2px solid #e0e6ed;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+
+    .quiz-option:hover:not(:disabled) {
+        background: #e9eef5;
+        border-color: #c5d0dd;
+    }
+
+    /************************************
+    Correct / Wrong Highlights
+*************************************/
+    .quiz-option.correct {
+        background: #d6f5d6;
+        border-color: #28a745;
+        color: #1b6c30;
+    }
+
+    .quiz-option.wrong {
+        background: #ffe0e0;
+        border-color: #dc3545;
+        color: #a20d1c;
+    }
+
+    .quiz-option.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+/************************************
+    Feedback Section
+*************************************/
+.quiz-feedback {
+    margin-top: 25px;
+    padding: 18px;
+    background: #f7f9fc;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e1e7ef;
+}
+
+    .quiz-feedback p {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+
+/************************************
+    Next Button
+*************************************/
+.next-btn {
+    padding: 10px 20px;
+    background: #0069d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s ease;
+}
+
+    .next-btn:hover {
+        background: #0053b3;
+    }
+
+/************************************
+    Mobile Responsive
+*************************************/
+@media (max-width: 600px) {
+    .quiz-card {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .quiz-option {
+        font-size: 0.95rem;
+        padding: 12px 14px;
+    }
+}
