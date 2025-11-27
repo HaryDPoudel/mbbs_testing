@@ -16,8 +16,7 @@
         {
             <button class="@GetOptionClass(opt)"
                     @onclick="() => AnswerSelected(opt)"
-                    disabled="@ShowFeedback"
-                    >
+                    disabled="@ShowFeedback">
                     
                     
                 @opt
@@ -25,13 +24,24 @@
         }
     </div>
 
-    @if(ShowFeedback)
+    @if (ShowFeedback )
     {
+        @if((FeedbackMessage.StartsWith("Wrong!"))==true)
+        {
+            <div class="quiz-feedback">
+                <p>@FeedbackMessage</p>
+                    <p>@Question.exp</p>
+            </div>
+        }
+        else {
         <div class="quiz-feedback">
             <p>@FeedbackMessage</p>
-            <span><p>@Question.exp</p></span>
-            
+
+            @* <span>@Question.exp</span> *@
+
         </div>
+        }
+       
     }
    
 
@@ -64,7 +74,7 @@
     private async Task AnswerSelected(string opt)
     {
         await OnSelectAnswer.InvokeAsync(opt);
-        isAnswered = true;
+       isAnswered = true;
         
     }
     private async Task NextQuestion()
