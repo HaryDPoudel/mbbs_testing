@@ -3,6 +3,5 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "SqlConnectionString":"Server=tcp:mbbsproto.database.windows.net,1433;Initial Catalog=MBBS_INDIA_PRODUCTS;Persist Security Info=False;User ID=D_Poudel;Password=Mandira,IL0veY0u;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"
-  }
+  
 }
