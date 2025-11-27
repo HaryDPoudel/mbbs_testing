@@ -16,29 +16,45 @@
         {
             <button class="@GetOptionClass(opt)"
                     @onclick="() => AnswerSelected(opt)"
-                    disabled="@ShowFeedback">
+                    disabled="@ShowFeedback"
+                    >
+                    
+                    
                 @opt
             </button>
         }
     </div>
 
-    @if (ShowFeedback)
+    @if(ShowFeedback)
     {
         <div class="quiz-feedback">
             <p>@FeedbackMessage</p>
-            <button class="next-btn" @onclick="OnNextQuestion">Next Question</button>
+            <span><p>@Question.exp</p></span>
+            
         </div>
     }
+   
+
+    @if(isAnswered )
+    {
+        <div class="quiz-feedback">
+            <button class="next-btn" disabled="@(!isAnswered)" @onclick="()=> NextQuestion()">Next Question</button>
+           
+        </div>
+    }
+
 </div>
 
 @code {
-    [Parameter] public QuestionItem Question { get; set; }
-    [Parameter] public int QuestionIndex { get; set; }
-    [Parameter] public int TotalQuestions { get; set; }
-    [Parameter] public EventCallback<string> OnSelectAnswer { get; set; }
-    [Parameter] public EventCallback OnNextQuestion { get; set; }
-    [Parameter] public bool ShowFeedback { get; set; }
-    [Parameter] public string? FeedbackMessage { get; set; }
+        [Parameter] public QuestionItem Question { get; set; }
+        [Parameter] public int QuestionIndex { get; set; }
+        [Parameter] public int TotalQuestions { get; set; }
+        [Parameter] public EventCallback<string> OnSelectAnswer { get; set; }
+        [Parameter] public EventCallback OnNextQuestion { get; set; }
+        [Parameter] public bool ShowFeedback { get; set; }
+        [Parameter] public string? FeedbackMessage { get; set; }
+
+    private bool isAnswered = false;
 
     private List<string> Options => new()
     {
@@ -48,15 +64,27 @@
     private async Task AnswerSelected(string opt)
     {
         await OnSelectAnswer.InvokeAsync(opt);
+        isAnswered = true;
+        
+    }
+    private async Task NextQuestion()
+    {
+        isAnswered = false;
+        await OnNextQuestion.InvokeAsync();
     }
 
     private string GetOptionClass(string opt)
     {
         if (!ShowFeedback) return "quiz-option";
 
-        string correct = Question.opc;
+        string correct =" Question.CorrectOption";
 
-        if (opt == correct) return "quiz-option correct";
+        if (opt == correct) { 
+            
+               
+                return "quiz-option correct"; 
+            
+        }
 
         if (opt != correct && FeedbackMessage?.StartsWith("Wrong!") == true)
             return "quiz-option wrong";
